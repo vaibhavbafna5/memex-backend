@@ -64,21 +64,24 @@ def add_entry_for_user(uuid):
     tags = data['tags']
     notes = data['notes']
 
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text)
-
     response = {
+        'uuid': uuid,
         'url': url,
         'tags': tags,
         'notes': notes,
         'title': '',
         'keywords': '',
-        'snippet': '',
+        'description': '',
         'add-date': date.today(),
     }
 
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text)
+
+    # parse relevant fields
     title_element = soup.find('title')
-    response['title'] = title_element.string
+    if title_element != None:
+        response['title'] = title_element.string
 
     metas = soup.find_all('meta')
 
