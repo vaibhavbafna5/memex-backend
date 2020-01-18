@@ -46,7 +46,7 @@ def show_user_entries():
         'dummy': 'hello'
     }
 
-@app.route('user/<uuid>/add', methods=['POST'])
+@app.route('/user/<uuid>/add', methods=['POST'])
 def add_entry_for_user():
     return 'success + {uuid}'
 
