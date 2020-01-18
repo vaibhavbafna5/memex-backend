@@ -52,6 +52,13 @@ def show_user_entries():
 
 @app.route('/user/<uuid>/add', methods=['POST'])
 def add_entry_for_user(uuid):
+
+    # get url 
+    # get title
+    # get keywords & descriptions if they exist
+
+    print("Data: ", request.data())
+    print("JSON: ", request.get_json())
     return {
         'url': request.args['url'],
         'tags': request.args['tags'],
