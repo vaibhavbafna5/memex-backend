@@ -1,6 +1,8 @@
 from flask import Flask, request
 from bs4 import BeautifulSoup
 from flask_cors import CORS
+from datetime import date
+
 import requests
 import gunicorn
 import sqlite3
@@ -57,12 +59,40 @@ def add_entry_for_user(uuid):
     # get title
     # get keywords & descriptions if they exist
     data = request.get_json()
-    return {
-        'url': data['url'],
-        'tags': data['tags'],
-        'notes': data['notes'],
+
+    url = data['url']
+    tags = data['tags']
+    notes = data['notes']
+
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text)
+
+    response = {
+        'url': url,
+        'tags': tags,
+        'notes': notes,
+        'title': '',
+        'keywords': '',
+        'snippet': '',
+        'add-date': date.today(),
     }
+
+    title_element = soup.find('title')
+    response['title'] = title_element.string
+
+    metas = soup.find_all('meta')
+
+    for meta in metas:
+
+        if 'name' in meta.attrs and meta.attrs['name'] in response:
+            if meta.attrs['name'] == 'keywords':
+                response['keywords'] = meta.attrs['content']
+            if meta.attrs['name'] == 'description':
+                response['description'] = meta.attrs['content']
+
     # return 'success + {uuid}'
+
+    return response
 
     # add to SQL schema
 
