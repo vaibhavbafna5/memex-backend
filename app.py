@@ -56,15 +56,11 @@ def add_entry_for_user(uuid):
     # get url 
     # get title
     # get keywords & descriptions if they exist
-
-    # print("Data: ", request.data())
-    print("Data: ", request.data)
-    print("Args: ", request.args)
-    print("JSON: ", request.get_json())
+    data = request.get_json()
     return {
-        'url': request.args['url'],
-        'tags': request.args['tags'],
-        'notes': request.args['notes'],
+        'url': data['url'],
+        'tags': data['tags'],
+        'notes': data['notes'],
     }
     # return 'success + {uuid}'
 
