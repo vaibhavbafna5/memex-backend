@@ -75,8 +75,8 @@ def add_entry_for_user(uuid):
         'add-date': date.today(),
     }
 
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text)
+    html_response = requests.get(url)
+    soup = BeautifulSoup(html_response.text)
 
     # parse relevant fields
     title_element = soup.find('title')
