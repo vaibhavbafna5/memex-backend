@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from bs4 import BeautifulSoup
 from flask_cors import CORS
 import requests
@@ -52,7 +52,11 @@ def show_user_entries():
 
 @app.route('/user/<uuid>/add', methods=['POST'])
 def add_entry_for_user(uuid):
-    return 'very nice {uuid}'
+    return {
+        'url': request.args['url'],
+        'tags': request.args['tags'],
+        'notes': request.args['notes'],
+    }
     # return 'success + {uuid}'
 
     # add to SQL schema
