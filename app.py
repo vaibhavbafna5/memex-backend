@@ -57,7 +57,9 @@ def add_entry_for_user(uuid):
     # get title
     # get keywords & descriptions if they exist
 
-    print("Data: ", request.data())
+    # print("Data: ", request.data())
+    print("Data: ", request.data)
+    print("Args: ", request.args)
     print("JSON: ", request.get_json())
     return {
         'url': request.args['url'],
