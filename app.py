@@ -1,8 +1,12 @@
 from flask import Flask
+from bs4 import BeautifulSoup
+from flask_cors import CORS
+import requests
 import gunicorn
 import sqlite3
 
 app = Flask(__name__)
+CORS(app)
 
 # get database
 DB_FILENAME = 'memex.sqlite3'
@@ -48,6 +52,9 @@ def show_user_entries():
 
 @app.route('/user/<uuid>/add', methods=['POST'])
 def add_entry_for_user():
+
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text)
     return 'success + {uuid}'
 
     # add to SQL schema
