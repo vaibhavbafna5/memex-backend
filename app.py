@@ -48,7 +48,7 @@ def show_user_entries():
 
 @app.route('user/<uuid>/add', methods=['POST'])
 def add_entry_for_user():
-    return 'User %s' % escape(uuid)
+    return 'success + {uuid}'
 
     # add to SQL schema
 
