@@ -52,10 +52,8 @@ def show_user_entries():
 
 @app.route('/user/<uuid>/add', methods=['POST'])
 def add_entry_for_user():
-
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text)
-    return 'success + {uuid}'
+    return 'very nice'
+    # return 'success + {uuid}'
 
     # add to SQL schema
 
